@@ -12,13 +12,14 @@ module.exports = function makeExchange(currency) {
     if(currency > 10000 ){
         return {error: "You are rich, my friend! We don't have so much coins for exchange"}
     }
- 
+    if(currency <= 0) return {};
     
     for(let key in  value){
         let tmp = Math.floor(currency /  value[key]);
         if(tmp > 0){
             result[key] = tmp;
         }
+        if ( currency == 0) break;
         currency = currency %  value[key] ;
     }    
     return result;
